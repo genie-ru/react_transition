@@ -11,16 +11,22 @@ const TransitionComp = () => {
     <>
       <Transition
         in={show}
-        timeout={2000}
+        timeout={{
+          enter: 2000,
+          exit: 50
+        }}
+        // enter={false} //removes the fade in effect
+        // exit={false} //removes the fade out effect
+        onEnter={(node)=>{
+          console.log('Enter')
+        }}
+        onExit={(node)=>{
+          console.log('Exit')
+        }}
       >
         { state => 
-          <div style={{
-            background: 'red',
-            height: '100px',
-            transition: 'all 2s ease',
-            opacity: state === 'exited' || state === 'exiting' ? 0 : 1
-          }}>
-            {state}
+          <div className={`square square-${state}`}>
+            {`square square-${state}`}
           </div>}
       </Transition>
       <button className="btn btn-primary" onClick={toggleDiv}>Toggle</button>
